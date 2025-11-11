@@ -1,0 +1,1 @@
+router.get('/dashboard/highest-wins', requireAuth, adminController.getHighestWins);
