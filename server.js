@@ -57,11 +57,11 @@ mongoose.set('strictQuery', false);
 
 // const dbUri = "mongodb+srv://fairstakegaming2:pJCZugGnBJ1vl8sV@cluster0.nwrgrrx.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
 
-const dbUri = "mongodb+srv://mongodb59:pJCZugGnBJ1vl8sV@cluster0.nktzitv.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
+// const dbUri = "mongodb+srv://mongodb59:pJCZugGnBJ1vl8sV@cluster0.nktzitv.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
 //mongorestore --uri "mongodb+srv://mongodb59:pJCZugGnBJ1vl8sV@cluster0.nktzitv.mongodb.net/" --db 'fairstakebet' ./mongo-backup/trynew
 
 //mongoose.connect(dbUri, { useNewUrlParser: true, useUnifiedTopology: true, serverSelectionTimeoutMS: 5000  })
-mongoose.connect(dbUri)
+mongoose.connect(process.env.DB_URI)
   .then((result) => console.log('Database connected'))
   .catch((err) => console.log("Database failed to connect"))
 const PORT = process.env.PORT || 8000;
