@@ -14,7 +14,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3000", "https://fairstakebet.com", "https://www.fairstakebet.com", "https://admin.fairstakebet.com"]
+  // origin: ["http://localhost:5173", "http://localhost:3000", "https://fairstakebet.com", "https://www.fairstakebet.com", "https://admin.fairstakebet.com"]
+  origin: '*'
 }));
 
 const server = createServer(app);
