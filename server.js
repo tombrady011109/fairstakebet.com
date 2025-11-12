@@ -9,9 +9,9 @@ const { createServer } = require("node:http");
 require("dotenv").config();
 // ============ Initilize the app ========================
 const app = express();
-app.use(express.json({ limit: '50mb' }));
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(express.urlencoded({ extended: true, limit: '50mb' }));
+app.use(express.json({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(express.urlencoded({ extended: true , limit: '50mb'}));
 
 app.use(cors({
   // origin: ["http://localhost:5173", "http://localhost:3000", "https://fairstakebet.com", "https://www.fairstakebet.com", "https://admin.fairstakebet.com"]
@@ -34,29 +34,29 @@ app.get("/", (req, res) => {
 app.use(function (err, req, res, next) {
   console.error(err.stack)
   res.status(500).json({
-    status: false,
-    code: 500,
-    error: `Can't find ${err.stack}`
+      status: false,
+      code  : 500,
+      error : `Can't find ${err.stack}`
   });
 });
 
 // 404 handler
 app.use(function (req, res, next) {
   res.status(404).json({
-    status: false,
-    code: 404,
-    error: `Can't find ${req.originalUrl}`
+      status: false,
+      code  : 404,
+      error : `Can't find ${req.originalUrl}`
   });
 });
 
 
 mongoose.set('strictQuery', false);
 // const dbUri = `mongodb://127.0.0.1:27017/fairstakebet`;
-// const dbUri = `mongodb+srv://highscoreteh:AoUXugCyZEfpBmMx@cluster0.xmpkpjc.mongodb.net/tet?retryWrites=true&w=majority`
+//const dbUri = `mongodb+srv://highscoreteh:AoUXugCyZEfpBmMx@cluster0.xmpkpjc.mongodb.net/tet?retryWrites=true&w=majority`
 
-// const dbUri = "mongodb+srv://highscoreteh:AoUXugCyZEfpBmMx@cluster0.xmpkpjc.mongodb.net/trynew?retryWrites=true&w=majority&connectTimeoutMS=300000"
+//const dbUri = "mongodb+srv://highscoreteh:AoUXugCyZEfpBmMx@cluster0.xmpkpjc.mongodb.net/trynew?retryWrites=true&w=majority&connectTimeoutMS=300000"
 
-// const dbUri = "mongodb+srv://fairstakegaming2:pJCZugGnBJ1vl8sV@cluster0.nwrgrrx.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
+//const dbUri = "mongodb+srv://fairstakegaming2:pJCZugGnBJ1vl8sV@cluster0.nwrgrrx.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
 
 // const dbUri = "mongodb+srv://mongodb59:pJCZugGnBJ1vl8sV@cluster0.nktzitv.mongodb.net/fairstakebet?retryWrites=true&w=majority&connectTimeoutMS=300000"
 //mongorestore --uri "mongodb+srv://mongodb59:pJCZugGnBJ1vl8sV@cluster0.nktzitv.mongodb.net/" --db 'fairstakebet' ./mongo-backup/trynew
@@ -89,3 +89,4 @@ const PORT = process.env.PORT || 8000;
 server.listen(PORT, () => {
   console.log("Running on port " + PORT);
 });
+
