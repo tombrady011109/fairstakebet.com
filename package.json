@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@types/bull": "^4.10.0",
-    "nodemon": "^3.1.10",
+    "nodemon": "^3.1.11",
     "svelte-motion": "^0.12.2"
   }
 }
