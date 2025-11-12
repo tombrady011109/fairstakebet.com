@@ -10,7 +10,8 @@ const HiloGame = require("../controllers/games/hilo")
 async function createsocket(httpServer) {
   const io = new Server(httpServer, {
     cors: {
-      origin: ["http://localhost:5173","https://fairstakebet.com","https://www.fairstakebet.com","https://admin.fairstakebet.com"],
+      // origin: ["http://localhost:5173","https://fairstakebet.com","https://www.fairstakebet.com","https://admin.fairstakebet.com"],
+      origin: '*',
       methods: ["GET", "POST"],
       credentials: true,
     },
