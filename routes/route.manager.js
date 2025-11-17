@@ -6,10 +6,13 @@ const CrashGameRoute = require('./games/crash.routes');
 const PlinkoGameRoute = require('./api/games/plinko.route');
 const adminRoute = require('./admin.route');
 const vipRoutes = require('./api/vip.route');
+const sportsRoutes = require('./api/sports.route');
 
 const routeManager = (app) => {
     // API Routes
+    // Support both `/auth/*` and `/api/auth/*` so different frontends/envs work
     app.use("/auth", authRoute);
+    app.use("/api/auth", authRoute);
     app.use("/api/user", userRoute)
     app.use("/api/ccpayment", ccpayment)
     app.use("/api/crash", CrashGameRoute);
@@ -17,6 +20,7 @@ const routeManager = (app) => {
     app.use('/api/affiliate', affiliateRoutes);
     // Add this with your other route imports
     app.use('/api/vip', vipRoutes);
+    app.use('/api/sports', sportsRoutes);
     app.use('/admin', adminRoute);
 }
 

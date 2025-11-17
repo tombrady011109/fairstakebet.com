@@ -153,6 +153,15 @@ const register = async (req, res) => {
     });
   } catch (error) {
     console.error('Registration error:', error);
+    
+    // Check for MongoDB quota error
+    if (error.message && (error.message.includes('space quota') || error.message.includes('AtlasError') || error.code === 8000)) {
+      return res.status(507).json({ 
+        message: 'Database storage limit reached. Please contact support.', 
+        error: 'Storage quota exceeded' 
+      });
+    }
+    
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 };

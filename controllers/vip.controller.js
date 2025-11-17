@@ -227,5 +227,17 @@ exports.getAllVipTiers = async (req, res) => {
   }
 };
 
-// Initialize VIP tiers when the controller is loaded
-initializeVipTiers().catch(console.error);
+// Initialize VIP tiers after database connection is established
+// This will be called from server.js after mongoose connects
+let vipTiersInitialized = false;
+exports.initializeVipTiersOnConnect = async () => {
+  if (!vipTiersInitialized) {
+    try {
+      await initializeVipTiers();
+      vipTiersInitialized = true;
+      console.log('✅ VIP tiers initialized');
+    } catch (error) {
+      console.error('❌ Failed to initialize VIP tiers:', error.message);
+    }
+  }
+};

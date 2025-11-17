@@ -1,4 +1,5 @@
 const ChatModel = require('../models/chat.model');
+const mongoose = require('mongoose');
 
 class Chat {
     constructor(io) {
@@ -141,8 +142,23 @@ class Chat {
 
         // Recursive function to send messages at random intervals
         const sendBotActivity = async () => {
+            // Check if database is connected before querying
+            if (mongoose.connection.readyState !== 1) {
+                // Database not connected, retry after 2 seconds
+                setTimeout(sendBotActivity, 2000);
+                return;
+            }
+            
             const botName = botNames[Math.floor(Math.random() * botNames.length)];
-            const lastMsg = await ChatModel.findOne().sort({ createdAt: -1 }).lean();
+            let lastMsg = null;
+            try {
+                lastMsg = await ChatModel.findOne().sort({ createdAt: -1 }).lean();
+            } catch (error) {
+                console.error('Error fetching last message for bot:', error.message);
+                // Retry after 2 seconds if query fails
+                setTimeout(sendBotActivity, 2000);
+                return;
+            }
 
             // Only reply to real users, not bots
             if (lastMsg && !botNames.includes(lastMsg.username)) {

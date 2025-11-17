@@ -47,7 +47,7 @@ const minesBetSchema = new mongoose.Schema({
 
 // Create indexes for better query performance
 minesBetSchema.index({ user_id: 1, created_at: -1 });
-minesBetSchema.index({ game_id: 1 }, { unique: true });
+// Note: game_id already has unique: true in the schema field definition, so no need to create index again
 
 const MinesBet = mongoose.model('MinesBet', minesBetSchema);
 
